@@ -1,0 +1,122 @@
+<!-- 11_my_favorites.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaCare - Citazioni Preferite</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+         .favorites-list { padding: 20px 20px 100px 20px; }
+         /* Reuse quote card style from 04_emotion_result or 08_community_quotes */
+        .quote-card {
+             background-color: var(--gold-gentle);
+             position: relative;
+             padding: 25px 20px; /* Adjusted padding */
+             margin-bottom: 20px;
+             border-radius: var(--border-radius-large);
+        }
+        .quote-card blockquote {
+            font-family: var(--font-slogan); /* Or 'Poppins' */
+            font-size: 20px; /* Slightly smaller than emotion result */
+            line-height: 1.5;
+            color: var(--gray-deep);
+            margin-bottom: 10px;
+        }
+        .quote-card cite {
+            font-size: 14px;
+            color: var(--gray-medium);
+            font-style: normal;
+        }
+        .quote-card .unfav-button { /* Specific button for unfavorite */
+             position: absolute;
+             bottom: 10px;
+             right: 10px;
+             width: 40px; height: 40px;
+             background-color: rgba(255,255,255,0.3);
+        }
+         .quote-card .unfav-button .icon {
+             width: 18px; height: 18px;
+             fill: var(--rose-warm); /* Heart filled indicates favorite */
+             stroke: var(--rose-warm);
+             stroke-width: 1; /* Optional stroke */
+         }
+          .quote-card .unfav-button:active .icon { fill: var(--gray-medium);} /* Indicate removal on click */
+
+
+         .back-button { /* Reusing style */
+             position: absolute; top: 20px; left: 15px; z-index: 10;
+             background: none; border: none; padding: 5px;
+         }
+         .back-button .icon { width: 28px; height: 28px; fill: var(--gray-deep);}
+    </style>
+</head>
+<body class="app-frame">
+    <!-- SVG Icons -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Paste all symbols from icons.svg here -->
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></symbol>
+        <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+        <symbol id="icon-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+        <symbol id="icon-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="7" y1="12" x2="17" y2="12"></line></symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></symbol>
+        <symbol id="icon-heart" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></symbol> <!-- Filled heart -->
+        <symbol id="icon-quote" viewBox="0 0 24 24" fill="currentColor"><path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z"/></symbol>
+        <!-- Add other needed icons -->
+    </svg>
+
+    <header style="position: relative; height: 60px;">
+        <a href="09_my_page.html" class="back-button" aria-label="Go back">
+             <svg class="icon"><use xlink:href="#icon-chevron-left"></use></svg>
+        </a>
+        <h1 class="page-title" style="padding-top: 20px;" data-i18n="favorite_quotes_title">Citazioni Preferite</h1>
+    </header>
+
+    <main>
+        <div class="favorites-list">
+            <!-- Favorite Quote 1 -->
+             <div class="neumorphic-card quote-card">
+                 <span class="quote-icon-bg" style="opacity: 0.1; font-size: 30px;"><svg class="icon"><use xlink:href="#icon-quote"></use></svg></span>
+                <blockquote>"La cura di sé non è un lusso, è una necessità."</blockquote>
+                <cite>Audre Lorde</cite>
+                <button class="neumorphic-button neumorphic-button--icon unfav-button" aria-label="Unfavorite quote">
+                     <svg class="icon"><use xlink:href="#icon-heart"></use></svg>
+                </button>
+            </div>
+
+             <!-- Favorite Quote 2 -->
+             <div class="neumorphic-card quote-card" style="background-color: var(--white-sand);"> <!-- Different bg example -->
+                 <span class="quote-icon-bg" style="opacity: 0.1; font-size: 30px;"><svg class="icon"><use xlink:href="#icon-quote"></use></svg></span>
+                 <blockquote>"Non devi essere perfetta per essere incredibile."</blockquote>
+                <cite>Anonimo</cite>
+                <button class="neumorphic-button neumorphic-button--icon unfav-button" aria-label="Unfavorite quote">
+                     <svg class="icon"><use xlink:href="#icon-heart"></use></svg>
+                </button>
+            </div>
+
+             <!-- Favorite Quote 3 -->
+             <div class="neumorphic-card quote-card">
+                 <span class="quote-icon-bg" style="opacity: 0.1; font-size: 30px;"><svg class="icon"><use xlink:href="#icon-quote"></use></svg></span>
+                <blockquote>"Respira profondamente. Sei al sicuro in questo momento."</blockquote>
+                <cite>LunaCare Team</cite>
+                <button class="neumorphic-button neumorphic-button--icon unfav-button" aria-label="Unfavorite quote">
+                     <svg class="icon"><use xlink:href="#icon-heart"></use></svg>
+                </button>
+            </div>
+            <!-- Add more favorite quotes -->
+        </div>
+    </main>
+
+    <!-- No Scan FAB needed here -->
+
+    <nav class="bottom-nav">
+         <a href="01_home.html" class="nav-item" data-i18n="nav_home"> <svg class="icon"><use xlink:href="#icon-home"></use></svg> Home </a>
+        <a href="02_find_points.html" class="nav-item" data-i18n="nav_find"> <svg class="icon"><use xlink:href="#icon-map-pin"></use></svg> Trova </a>
+        <a href="03_emotion_start.html" class="nav-item" data-i18n="nav_emotion"> <svg class="icon"><use xlink:href="#icon-smile"></use></svg> Emozioni </a>
+        <a href="05_community.html" class="nav-item" data-i18n="nav_community"> <svg class="icon"><use xlink:href="#icon-users"></use></svg> Comunità </a>
+        <a href="09_my_page.html" class="nav-item active" data-i18n="nav_my"> <svg class="icon"><use xlink:href="#icon-user"></use></svg> Io </a>
+    </nav>
+</body>
+</html>
