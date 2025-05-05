@@ -1,0 +1,115 @@
+<!-- 03_emotion_start.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaCare - Emozioni</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .emotion-selection {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            padding: 30px 25px 100px 25px; /* Extra padding bottom */
+            text-align: center;
+        }
+        .emotion-button {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 25px 15px;
+            border-radius: var(--border-radius-large);
+            font-size: 16px;
+            font-weight: 500;
+            min-height: 120px; /* Ensure good size */
+             background-color: var(--white-sand); /* Use sand for contrast */
+        }
+         .emotion-button .icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 10px;
+            fill: var(--peach-sun); /* Color for icons */
+            stroke: none;
+        }
+         /* Specific icon colors if needed */
+        .emotion-button[data-emotion="happy"] .icon { fill: var(--gold-gentle); }
+        .emotion-button[data-emotion="calm"] .icon { fill: #a0d2eb; } /* Light Blue */
+        .emotion-button[data-emotion="sad"] .icon { fill: #a0c4ff; } /* Blue */
+        .emotion-button[data-emotion="anxious"] .icon { fill: var(--peach-sun); }
+        .emotion-button[data-emotion="tired"] .icon { fill: #bdb2ff; } /* Lavender */
+        .emotion-button[data-emotion="energetic"] .icon { fill: #ffafcc; } /* Pink */
+
+         .emotion-button:active {
+             box-shadow: var(--neumorphic-shadow-pressed);
+             transform: scale(0.97);
+         }
+    </style>
+</head>
+<body class="app-frame">
+    <!-- SVG Icons -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+         <!-- Paste all symbols from icons.svg here -->
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></symbol>
+        <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+        <symbol id="icon-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+        <symbol id="icon-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="7" y1="12" x2="17" y2="12"></line></symbol>
+        <!-- Emotion specific icons (using simple shapes or placeholders) -->
+         <symbol id="icon-emotion-happy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+         <symbol id="icon-emotion-calm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5-1 4-1 4 1 4 1"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+        <symbol id="icon-emotion-sad" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5-2 4-2 4 2 4 2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+         <symbol id="icon-emotion-anxious" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path><path d="M9 16s0-2 3-2 3 2 3 2"></path><ellipse cx="9" cy="9" rx="1" ry="1.5"></ellipse><ellipse cx="15" cy="9" rx="1" ry="1.5"></ellipse></symbol>
+        <symbol id="icon-emotion-tired" viewBox="0 0 24 24"><path d="M17.66 12.34l-1.42 1.42L12 10.5l-4.24 3.26-1.42-1.42L12 7.5l5.66 4.84zM4 18h16"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+        <symbol id="icon-emotion-energetic" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></symbol>
+        <!-- Add other needed icons -->
+    </svg>
+
+    <header class="padding-container">
+        <h1 class="page-title" data-i18n="emotion_module_title">Come ti senti oggi?</h1>
+    </header>
+
+    <main>
+        <div class="emotion-selection">
+            <a href="04_emotion_result.html?e=happy" class="neumorphic-button emotion-button" data-emotion="happy">
+                <svg class="icon"><use xlink:href="#icon-emotion-happy"></use></svg>
+                <span data-i18n="emotion_happy">Felice</span>
+            </a>
+             <a href="04_emotion_result.html?e=calm" class="neumorphic-button emotion-button" data-emotion="calm">
+                <svg class="icon"><use xlink:href="#icon-emotion-calm"></use></svg>
+                 <span data-i18n="emotion_calm">Calma</span>
+            </a>
+             <a href="04_emotion_result.html?e=sad" class="neumorphic-button emotion-button" data-emotion="sad">
+                 <svg class="icon"><use xlink:href="#icon-emotion-sad"></use></svg>
+                 <span data-i18n="emotion_sad">Triste</span>
+            </a>
+             <a href="04_emotion_result.html?e=anxious" class="neumorphic-button emotion-button" data-emotion="anxious">
+                <svg class="icon"><use xlink:href="#icon-emotion-anxious"></use></svg>
+                 <span data-i18n="emotion_anxious">Ansiosa</span>
+            </a>
+             <a href="04_emotion_result.html?e=tired" class="neumorphic-button emotion-button" data-emotion="tired">
+                 <svg class="icon"><use xlink:href="#icon-emotion-tired"></use></svg>
+                 <span data-i18n="emotion_tired">Stanca</span>
+            </a>
+             <a href="04_emotion_result.html?e=energetic" class="neumorphic-button emotion-button" data-emotion="energetic">
+                <svg class="icon"><use xlink:href="#icon-emotion-energetic"></use></svg>
+                 <span data-i18n="emotion_energetic">Energica</span>
+            </a>
+        </div>
+    </main>
+
+    <button class="fab-scan neumorphic-button--icon" aria-label="Scan QR Code" data-i18n="scan_button_label">
+        <svg class="icon"><use xlink:href="#icon-scan"></use></svg>
+    </button>
+
+    <nav class="bottom-nav">
+        <a href="01_home.html" class="nav-item" data-i18n="nav_home"> <svg class="icon"><use xlink:href="#icon-home"></use></svg> Home </a>
+        <a href="02_find_points.html" class="nav-item" data-i18n="nav_find"> <svg class="icon"><use xlink:href="#icon-map-pin"></use></svg> Trova </a>
+        <a href="03_emotion_start.html" class="nav-item active" data-i18n="nav_emotion"> <svg class="icon"><use xlink:href="#icon-smile"></use></svg> Emozioni </a>
+        <a href="05_community.html" class="nav-item" data-i18n="nav_community"> <svg class="icon"><use xlink:href="#icon-users"></use></svg> Comunità </a>
+        <a href="09_my_page.html" class="nav-item" data-i18n="nav_my"> <svg class="icon"><use xlink:href="#icon-user"></use></svg> Io </a>
+    </nav>
+</body>
+</html>
