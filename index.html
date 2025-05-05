@@ -1,4 +1,4 @@
-<!-- index.html (Preview Page - Filled with Iframes) -->
+<!-- index.html (Preview Page - Updated with All Iframes) -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -10,8 +10,10 @@
         h1 { text-align: center; color: #333; margin-bottom: 40px; font-weight: 600;}
         .preview-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Adjust minmax for spacing */
-            gap: 40px 30px; /* Increased row gap */
+            /* Adjust minmax to ensure 4 columns fit comfortably, considering gap */
+            /* E.g., 377px width + 30px gap = 407px per item. 4 * 407 = 1628px needed minimum viewport width for 4 cols */
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px 30px; /* Row gap, Column gap */
             justify-items: center;
         }
         .preview-item {
@@ -22,7 +24,7 @@
             height: 814px; /* 812px + 1px border * 2 */
             border: 1px solid #ccc;
             background-color: #fff; /* iframe background */
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12); /* Slightly enhanced shadow */
             overflow: hidden; /* Hide potential scrollbars from iframe */
             border-radius: 40px; /* Optional: Make the frame look more like a phone */
         }
@@ -31,7 +33,7 @@
             height: 100%;
             border: none;
             display: block;
-            border-radius: 40px; /* Match container */
+            border-radius: inherit; /* Inherit radius from container */
         }
          .preview-title {
             text-align: center;
@@ -83,22 +85,19 @@
     </div>
      <div class="preview-item">
         <div class="preview-container">
-             <!-- Placeholder for 06 -->
-             <iframe src="06_community_post.html" title="LunaCare Community Post Detail Preview (Placeholder)"></iframe>
+             <iframe src="06_community_post.html" title="LunaCare Community Post Detail Preview"></iframe>
         </div>
          <div class="preview-title">06 Community Post Detail</div>
     </div>
      <div class="preview-item">
         <div class="preview-container">
-             <!-- Placeholder for 07 -->
-              <iframe src="07_community_create.html" title="LunaCare Create Post Preview (Placeholder)"></iframe>
+              <iframe src="07_community_create.html" title="LunaCare Create Post Preview"></iframe>
         </div>
          <div class="preview-title">07 Create Post</div>
     </div>
     <div class="preview-item">
         <div class="preview-container">
-             <!-- Placeholder for 08 -->
-              <iframe src="08_community_quotes.html" title="LunaCare Quote Wall Preview (Placeholder)"></iframe>
+              <iframe src="08_community_quotes.html" title="LunaCare Quote Wall Preview"></iframe>
         </div>
          <div class="preview-title">08 Quote Wall</div>
     </div>
@@ -112,15 +111,13 @@
     </div>
     <div class="preview-item">
         <div class="preview-container">
-            <!-- Placeholder for 10 -->
-             <iframe src="10_my_history.html" title="LunaCare Pickup History Preview (Placeholder)"></iframe>
+             <iframe src="10_my_history.html" title="LunaCare Pickup History Preview"></iframe>
         </div>
          <div class="preview-title">10 My History</div>
     </div>
         <div class="preview-item">
         <div class="preview-container">
-            <!-- Placeholder for 11 -->
-             <iframe src="11_my_favorites.html" title="LunaCare Favorite Quotes Preview (Placeholder)"></iframe>
+             <iframe src="11_my_favorites.html" title="LunaCare Favorite Quotes Preview"></iframe>
         </div>
          <div class="preview-title">11 My Favorites</div>
     </div>
