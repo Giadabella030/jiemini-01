@@ -1,0 +1,124 @@
+<!-- index.html (Preview Page) -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaCare App Preview</title>
+    <style>
+        body { font-family: 'Poppins', sans-serif; background-color: #f0f0f0; padding: 20px; }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Adjust minmax for spacing */
+            gap: 30px;
+            justify-items: center;
+        }
+        .preview-container {
+            width: 377px; /* 375px + 1px border * 2 */
+            height: 814px; /* 812px + 1px border * 2 */
+            border: 1px solid #ccc;
+            background-color: #fff; /* iframe background */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden; /* Hide potential scrollbars from iframe */
+        }
+        .preview-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+         .preview-title {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        .preview-item {
+             margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>LunaCare App UI Prototype (HTML Preview)</h1>
+
+<div class="preview-grid">
+    <div class="preview-item">
+        <div class="preview-container">
+            <iframe src="01_home.html"></iframe>
+        </div>
+         <div class="preview-title">01 Home</div>
+    </div>
+    <div class="preview-item">
+        <div class="preview-container">
+            <iframe src="02_find_points.html"></iframe>
+        </div>
+        <div class="preview-title">02 Find Points</div>
+    </div>
+    <div class="preview-item">
+        <div class="preview-container">
+             <iframe src="03_emotion_start.html"></iframe>
+        </div>
+         <div class="preview-title">03 Emotion Start</div>
+    </div>
+     <div class="preview-item">
+        <div class="preview-container">
+             <iframe src="04_emotion_result.html"></iframe>
+        </div>
+         <div class="preview-title">04 Emotion Result</div>
+    </div>
+    <div class="preview-item">
+        <div class="preview-container">
+             <iframe src="05_community.html"></iframe>
+        </div>
+         <div class="preview-title">05 Community Feed</div>
+    </div>
+     <div class="preview-item">
+        <div class="preview-container">
+             <iframe src="06_community_post.html"></iframe>
+        </div>
+         <div class="preview-title">06 Community Post Detail</div>
+    </div>
+     <div class="preview-item">
+        <div class="preview-container">
+             <iframe src="07_community_create.html"></iframe>
+        </div>
+         <div class="preview-title">07 Create Post</div>
+    </div>
+    <div class="preview-item">
+        <div class="preview-container">
+             <iframe src="08_community_quotes.html"></iframe>
+        </div>
+         <div class="preview-title">08 Quote Wall</div>
+    </div>
+     <div class="preview-item">
+        <div class="preview-container">
+             <iframe src="09_my_page.html"></iframe>
+        </div>
+         <div class="preview-title">09 My Page (Calendar)</div>
+    </div>
+    <div class="preview-item">
+        <div class="preview-container">
+             <iframe src="10_my_history.html"></iframe>
+        </div>
+         <div class="preview-title">10 My History</div>
+    </div>
+        <div class="preview-item">
+        <div class="preview-container">
+             <iframe src="11_my_favorites.html"></iframe>
+        </div>
+         <div class="preview-title">11 My Favorites</div>
+    </div>
+        <div class="preview-item">
+        <div class="preview-container">
+             <iframe src="12_my_settings.html"></iframe>
+        </div>
+         <div class="preview-title">12 Settings (Language)</div>
+    </div>
+    <!-- Add more preview containers as needed -->
+
+</div>
+
+</body>
+</html>
