@@ -1,0 +1,177 @@
+<!-- 04_emotion_result.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaCare - Il tuo supporto</title>
+    <link rel="stylesheet" href="style.css">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For audio icons -->
+    <style>
+        .result-container {
+            padding: 20px 20px 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .quote-card {
+             background-color: var(--gold-gentle); /* Gentle gold for quotes */
+             position: relative;
+             padding: 30px 20px;
+             margin-bottom: 30px;
+        }
+        .quote-card blockquote {
+            font-family: var(--font-slogan); /* Or a nice serif */
+            font-size: 24px;
+            line-height: 1.5;
+            color: var(--gray-deep);
+            margin-bottom: 10px;
+        }
+        .quote-card cite {
+            font-size: 14px;
+            color: var(--gray-medium);
+            font-style: normal;
+        }
+         .quote-icon-bg {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 40px;
+            color: rgba(255, 255, 255, 0.5); /* Faint quote icon */
+            line-height: 1;
+        }
+        .audio-player-placeholder {
+            width: 100%;
+            padding: 15px;
+             background-color: var(--white-sand); /* Match cards */
+             margin-bottom: 30px;
+             display: flex;
+             align-items: center;
+             justify-content: space-between;
+        }
+        .audio-controls button { background: none; border: none; font-size: 24px; color: var(--rose-warm); padding: 5px; cursor: pointer; }
+        .audio-controls button:active { opacity: 0.7; }
+        .audio-info { text-align: left; }
+        .audio-info .title { font-weight: 500; }
+        .audio-info .duration { font-size: 12px; color: var(--gray-medium); }
+
+        .animation-placeholder {
+            width: 100%;
+            height: 150px;
+            background-color: var(--peach-sun); /* Peach for animation area */
+            opacity: 0.6;
+            border-radius: var(--border-radius-large);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 16px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            /* Basic CSS animation example */
+            animation: pulse-bg 3s infinite ease-in-out;
+        }
+        @keyframes pulse-bg {
+             0%, 100% { opacity: 0.6; transform: scale(1); }
+             50% { opacity: 0.8; transform: scale(1.02); }
+        }
+        .back-button { /* Simple back button for header */
+             position: absolute;
+             top: 20px;
+             left: 15px;
+             z-index: 10;
+             background: none;
+             border: none;
+             padding: 5px;
+        }
+        .back-button .icon { width: 28px; height: 28px; fill: var(--gray-deep);}
+    </style>
+</head>
+<body class="app-frame">
+    <!-- SVG Icons -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+         <!-- Paste all symbols from icons.svg here -->
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></symbol>
+        <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+        <symbol id="icon-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+        <symbol id="icon-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="7" y1="12" x2="17" y2="12"></line></symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></symbol>
+         <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></symbol>
+         <symbol id="icon-quote" viewBox="0 0 24 24" fill="currentColor"><path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z"/></symbol>
+        <!-- Add other needed icons -->
+    </svg>
+
+     <header style="position: relative; height: 60px;">
+        <a href="03_emotion_start.html" class="back-button" aria-label="Go back">
+             <svg class="icon"><use xlink:href="#icon-chevron-left"></use></svg>
+        </a>
+        <h1 class="page-title" style="padding-top: 20px;" data-i18n="emotion_result_title">Un po' di conforto per te</h1>
+    </header>
+
+    <main>
+        <div class="result-container">
+
+            <!-- Quote Card -->
+            <div class="neumorphic-card quote-card">
+                <span class="quote-icon-bg"><svg class="icon" style="width: 1em; height: 1em;"><use xlink:href="#icon-quote"></use></svg></span>
+                 <!-- Example quote - content should change based on emotion -->
+                <blockquote data-i18n="sample_quote">"Anche la notte più scura finirà e sorgerà il sole."</blockquote>
+                <cite data-i18n="sample_quote_author">Victor Hugo</cite>
+                <button class="neumorphic-button neumorphic-button--icon" style="position: absolute; bottom: 10px; right: 10px; width: 40px; height: 40px; background-color: rgba(255,255,255,0.3);" aria-label="Favorite this quote">
+                     <svg class="icon" style="width: 18px; height: 18px; fill: var(--rose-warm);"><use xlink:href="#icon-heart"></use></svg>
+                </button>
+            </div>
+
+            <!-- Audio Player Placeholder -->
+             <div class="neumorphic-card audio-player-placeholder">
+                 <div class="audio-info">
+                    <div class="title" data-i18n="audio_title">Meditazione Calmante</div>
+                    <div class="duration" data-i18n="audio_duration">5:00 min</div>
+                 </div>
+                 <div class="audio-controls">
+                    <button aria-label="Play/Pause"><i class="fas fa-play"></i></button>
+                 </div>
+            </div>
+
+            <!-- Animation Placeholder -->
+            <div class="neumorphic-raised animation-placeholder">
+                <span data-i18n="animation_placeholder">Animazione Rilassante</span>
+                 <!-- Canvas or CSS animation here -->
+            </div>
+
+        </div>
+    </main>
+
+     <button class="fab-scan neumorphic-button--icon" aria-label="Scan QR Code" data-i18n="scan_button_label">
+        <svg class="icon"><use xlink:href="#icon-scan"></use></svg>
+    </button>
+
+    <nav class="bottom-nav">
+       <a href="01_home.html" class="nav-item" data-i18n="nav_home"> <svg class="icon"><use xlink:href="#icon-home"></use></svg> Home </a>
+        <a href="02_find_points.html" class="nav-item" data-i18n="nav_find"> <svg class="icon"><use xlink:href="#icon-map-pin"></use></svg> Trova </a>
+        <a href="03_emotion_start.html" class="nav-item active" data-i18n="nav_emotion"> <svg class="icon"><use xlink:href="#icon-smile"></use></svg> Emozioni </a>
+        <a href="05_community.html" class="nav-item" data-i18n="nav_community"> <svg class="icon"><use xlink:href="#icon-users"></use></svg> Comunità </a>
+        <a href="09_my_page.html" class="nav-item" data-i18n="nav_my"> <svg class="icon"><use xlink:href="#icon-user"></use></svg> Io </a>
+    </nav>
+
+     <script>
+        // Example: Update content based on URL parameter (very basic)
+        const urlParams = new URLSearchParams(window.location.search);
+        const emotion = urlParams.get('e');
+        const quoteEl = document.querySelector('.quote-card blockquote');
+        const authorEl = document.querySelector('.quote-card cite');
+
+        if (emotion === 'sad' && quoteEl) {
+            quoteEl.textContent = `"Dentro di te c'è una forza che può superare qualsiasi tristezza."`;
+             authorEl.textContent = "LunaCare Team"; // Or find appropriate quotes
+             // Potentially change audio/animation too
+        } else if (emotion === 'anxious' && quoteEl) {
+             quoteEl.textContent = `"Respira profondamente. Sei al sicuro in questo momento."`;
+             authorEl.textContent = "LunaCare Team";
+        }
+        // Add more conditions for other emotions
+    </script>
+</body>
+</html>
