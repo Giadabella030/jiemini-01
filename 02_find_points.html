@@ -1,0 +1,111 @@
+<!-- 02_find_points.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaCare - Trova Punti</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .map-area {
+            height: 40vh; /* Adjust height as needed */
+            background-color: #e0e0e0;
+             background-image: url('https://source.unsplash.com/random/375x300/?milan,street,map');
+             background-size: cover;
+             background-position: center;
+            margin-bottom: 20px;
+            position: relative; /* For filter button positioning */
+            box-shadow: var(--neumorphic-shadow-inset);
+        }
+        .filter-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
+        }
+        .point-list-container {
+            padding: 0 20px 80px 20px; /* Padding bottom for FAB */
+        }
+         .point-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+         }
+         .point-info h3 { font-size: 16px; margin-bottom: 4px; }
+         .point-info p { font-size: 13px; color: var(--gray-medium); }
+         .point-distance { font-size: 14px; color: var(--rose-warm); font-weight: 500; }
+    </style>
+</head>
+<body class="app-frame">
+    <!-- SVG Icons (Assume included or linked) -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Paste all symbols from icons.svg here -->
+        <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></symbol>
+        <symbol id="icon-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+        <symbol id="icon-smile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+        <symbol id="icon-scan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="7" y1="12" x2="17" y2="12"></line></symbol>
+        <symbol id="icon-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></symbol>
+        <!-- Add other needed icons -->
+    </svg>
+
+    <header class="padding-container">
+        <h1 class="page-title" data-i18n="find_page_title">Trova Punti di Ritiro</h1>
+    </header>
+
+    <main>
+        <div class="map-area" aria-label="Map of pickup points">
+            <!-- Map API Integration Placeholder -->
+            <button class="neumorphic-button neumorphic-button--icon filter-button" aria-label="Filter points">
+                <svg class="icon"><use xlink:href="#icon-filter"></use></svg>
+            </button>
+        </div>
+
+        <div class="point-list-container">
+            <h2 class="section-title" data-i18n="nearby_points">Punti Vicini</h2>
+
+            <div class="neumorphic-card point-card margin-bottom-m">
+                <div class="point-info">
+                    <h3 data-i18n="point_name_1">Biblioteca Sormani</h3>
+                    <p data-i18n="point_address_1">Corso di Porta Vittoria, 6</p>
+                    <p><span class="status-indicator status-available" style="display: inline-block; margin-right: 5px;"></span><span data-i18n="status_available">Disponibile</span></p>
+                </div>
+                <div class="point-distance" data-i18n="distance_1">200m</div>
+            </div>
+
+             <div class="neumorphic-card point-card margin-bottom-m">
+                <div class="point-info">
+                     <h3 data-i18n="point_name_2">Università degli Studi di Milano</h3>
+                    <p data-i18n="point_address_2">Via Festa del Perdono, 7</p>
+                    <p><span class="status-indicator status-limited" style="display: inline-block; margin-right: 5px;"></span><span data-i18n="status_limited">Scorte Limitate</span></p>
+                </div>
+                <div class="point-distance" data-i18n="distance_2">550m</div>
+            </div>
+
+             <div class="neumorphic-card point-card margin-bottom-m">
+                <div class="point-info">
+                    <h3 data-i18n="point_name_3">Farmacia Centrale</h3>
+                    <p data-i18n="point_address_3">Via Torino, 21</p>
+                     <p><span class="status-indicator status-empty" style="display: inline-block; margin-right: 5px;"></span><span data-i18n="status_empty">Esaurito</span></p>
+                </div>
+                 <div class="point-distance" data-i18n="distance_3">800m</div>
+            </div>
+            <!-- More points -->
+        </div>
+    </main>
+
+    <button class="fab-scan neumorphic-button--icon" aria-label="Scan QR Code" data-i18n="scan_button_label">
+        <svg class="icon"><use xlink:href="#icon-scan"></use></svg>
+    </button>
+
+    <nav class="bottom-nav">
+        <a href="01_home.html" class="nav-item" data-i18n="nav_home"> <svg class="icon"><use xlink:href="#icon-home"></use></svg> Home </a>
+        <a href="02_find_points.html" class="nav-item active" data-i18n="nav_find"> <svg class="icon"><use xlink:href="#icon-map-pin"></use></svg> Trova </a>
+        <a href="03_emotion_start.html" class="nav-item" data-i18n="nav_emotion"> <svg class="icon"><use xlink:href="#icon-smile"></use></svg> Emozioni </a>
+        <a href="05_community.html" class="nav-item" data-i18n="nav_community"> <svg class="icon"><use xlink:href="#icon-users"></use></svg> Comunità </a>
+        <a href="09_my_page.html" class="nav-item" data-i18n="nav_my"> <svg class="icon"><use xlink:href="#icon-user"></use></svg> Io </a>
+    </nav>
+</body>
+</html>
