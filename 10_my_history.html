@@ -1,0 +1,112 @@
+<!-- 10_my_history.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaCare - Cronologia Ritiri</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .history-list { padding: 20px 20px 100px 20px; }
+        .history-item-card {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: var(--white-sand);
+        }
+        .history-item-icon {
+            width: 40px; height: 40px;
+            border-radius: var(--border-radius-small);
+            background-color: var(--rose-warm);
+            display: flex; justify-content: center; align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+             box-shadow: var(--neumorphic-shadow-inset); /* Inset icon background */
+        }
+         .history-item-icon .icon { width: 22px; height: 22px; fill: var(--white); }
+        .history-item-info { flex-grow: 1; }
+        .history-item-info .location { font-weight: 500; font-size: 16px; margin-bottom: 3px; }
+        .history-item-info .address { font-size: 13px; color: var(--gray-medium); margin-bottom: 5px; }
+        .history-item-info .datetime { font-size: 13px; color: var(--gray-deep); }
+
+         .back-button { /* Reusing style */
+             position: absolute; top: 20px; left: 15px; z-index: 10;
+             background: none; border: none; padding: 5px;
+         }
+         .back-button .icon { width: 28px; height: 28px; fill: var(--gray-deep);}
+    </style>
+</head>
+<body class="app-frame">
+    <!-- SVG Icons -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+         <!-- Paste all symbols from icons.svg here -->
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></symbol>
+        <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+        <symbol id="icon-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+        <symbol id="icon-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="7" y1="12" x2="17" y2="12"></line></symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></symbol>
+         <symbol id="icon-list" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></symbol>
+         <symbol id="icon-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C9.8 2 12 4.2 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C14.2 2 12 4.2 12 7z"></path></symbol>
+        <!-- Add other needed icons -->
+    </svg>
+
+    <header style="position: relative; height: 60px;">
+        <a href="09_my_page.html" class="back-button" aria-label="Go back">
+             <svg class="icon"><use xlink:href="#icon-chevron-left"></use></svg>
+        </a>
+        <h1 class="page-title" style="padding-top: 20px;" data-i18n="pickup_history_title">Cronologia Ritiri</h1>
+    </header>
+
+    <main>
+        <div class="history-list">
+            <!-- History Item 1 -->
+            <div class="neumorphic-card history-item-card">
+                 <div class="history-item-icon">
+                     <svg class="icon"><use xlink:href="#icon-gift"></use></svg> <!-- Or map-pin -->
+                 </div>
+                 <div class="history-item-info">
+                     <div class="location" data-i18n="history_loc_1">Biblioteca Sormani</div>
+                     <div class="address" data-i18n="history_addr_1">Corso di Porta Vittoria, 6</div>
+                     <div class="datetime" data-i18n="history_datetime_1">15 Maggio 2024, 14:30</div>
+                 </div>
+            </div>
+            <!-- History Item 2 -->
+            <div class="neumorphic-card history-item-card">
+                 <div class="history-item-icon">
+                      <svg class="icon"><use xlink:href="#icon-gift"></use></svg>
+                 </div>
+                 <div class="history-item-info">
+                     <div class="location" data-i18n="history_loc_2">Università degli Studi di Milano</div>
+                     <div class="address" data-i18n="history_addr_2">Via Festa del Perdono, 7</div>
+                     <div class="datetime" data-i18n="history_datetime_2">28 Aprile 2024, 11:15</div>
+                 </div>
+            </div>
+             <!-- History Item 3 -->
+             <div class="neumorphic-card history-item-card">
+                 <div class="history-item-icon">
+                      <svg class="icon"><use xlink:href="#icon-gift"></use></svg>
+                 </div>
+                 <div class="history-item-info">
+                     <div class="location" data-i18n="history_loc_3">Centro Donna</div>
+                     <div class="address" data-i18n="history_addr_3">Via Oglio, 18</div>
+                     <div class="datetime" data-i18n="history_datetime_3">10 Aprile 2024, 17:00</div>
+                 </div>
+             </div>
+            <!-- More history items -->
+        </div>
+    </main>
+
+    <!-- No Scan FAB needed here -->
+
+    <nav class="bottom-nav">
+         <a href="01_home.html" class="nav-item" data-i18n="nav_home"> <svg class="icon"><use xlink:href="#icon-home"></use></svg> Home </a>
+        <a href="02_find_points.html" class="nav-item" data-i18n="nav_find"> <svg class="icon"><use xlink:href="#icon-map-pin"></use></svg> Trova </a>
+        <a href="03_emotion_start.html" class="nav-item" data-i18n="nav_emotion"> <svg class="icon"><use xlink:href="#icon-smile"></use></svg> Emozioni </a>
+        <a href="05_community.html" class="nav-item" data-i18n="nav_community"> <svg class="icon"><use xlink:href="#icon-users"></use></svg> Comunità </a>
+        <a href="09_my_page.html" class="nav-item active" data-i18n="nav_my"> <svg class="icon"><use xlink:href="#icon-user"></use></svg> Io </a>
+    </nav>
+</body>
+</html>
