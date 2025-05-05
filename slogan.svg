@@ -1,0 +1,23 @@
+<!-- slogan<!-- slogan..svg (Brittany Signature Example - Needs Font Installed/Embedded) -->
+<svg width="400" height="100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Define gradient if needed -->
+    <linearGradient id="sloganGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:var(--rose-warm);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:var(--peach-sun);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <style>
+    .slogan-text {
+      font-family: 'Brittany Signature', cursive; /* Ensure font is loaded */
+      font-size: 60px;
+      fill: url(#sloganGradient); /* Or use var(--rose-warm) */
+       /* Add text-shadow for slight 3D feel */
+       filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.1));
+    }
+  </style>
+  <text x="50%" y="50%" dy=".3em" text-anchor="middle" class="slogan-text">
+    Segui la tua luna
+  </text>
+</svg>
+<!-- Note: For reliable SVG font rendering, font might need to be converted to paths or embedded. PNG is a safer bet for complex fonts without extra setup. -->
