@@ -1,0 +1,378 @@
+/* style.css (Core Styles & Neumorphism) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Brittany+Signature&display=swap'); /* Example for Brittany Signature */
+/* Note: Milano font might need local hosting or alternative */
+
+:root {
+  --rose-warm: #D97A6D;
+  --peach-sun: #F89B4F;
+  --gold-gentle: #ECD380;
+  --white-sand: #E8DDCF; /* Use for specific backgrounds */
+  --base-bg: #f5f5f5;    /* Main background */
+  --gray-deep: #2B2B2B;
+  --gray-medium: #777;
+  --gray-light: #aaa;
+  --white: #ffffff;
+
+  /* Neumorphism Shadows (Adjust intensity/blur as needed) */
+  --shadow-light: rgba(255, 255, 255, 0.7); /* Brighter for lighter bg */
+  --shadow-dark: rgba(180, 160, 140, 0.3);  /* Softer dark shadow */
+  /* Adjust dark shadow if using pure white bg: rgba(0,0,0,0.1) */
+
+  --neumorphic-shadow-raised: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+  --neumorphic-shadow-inset: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+  --neumorphic-shadow-pressed: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); /* Subtle press */
+
+  --border-radius-large: 20px;
+  --border-radius-medium: 16px;
+  --border-radius-small: 12px;
+
+  --font-main: 'Poppins', '思源黑体', 'Roboto', sans-serif;
+  --font-slogan: 'Brittany Signature', cursive; /* Fallback needed */
+  --font-slogan-alt: 'Milano', sans-serif; /* Placeholder */
+
+  --transition-smooth: all 0.3s ease-in-out;
+}
+
+/* Basic Reset & Body */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body.app-frame { /* Apply this class to body in each app page HTML */
+  font-family: var(--font-main);
+  background-color: var(--base-bg);
+  color: var(--gray-deep);
+  overflow-x: hidden; /* Prevent horizontal scroll */
+   /* Ensure within the 375x812 boundary if needed, though iframe handles this */
+}
+
+/* Neumorphic Base Styles */
+.neumorphic-raised {
+  background-color: var(--base-bg);
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--neumorphic-shadow-raised);
+  transition: var(--transition-smooth);
+}
+
+.neumorphic-inset {
+  background-color: var(--base-bg); /* Can slightly darken or lighten for depth */
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--neumorphic-shadow-inset);
+  transition: var(--transition-smooth);
+}
+
+/* Buttons */
+.neumorphic-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  border: none;
+  background-color: var(--base-bg);
+  color: var(--gray-deep);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--neumorphic-shadow-raised);
+  transition: var(--transition-smooth);
+  text-decoration: none; /* For <a> tags styled as buttons */
+  min-width: 60px; /* Ensure minimum touch area */
+  min-height: 44px;
+}
+
+.neumorphic-button:hover {
+  /* Optional subtle hover effect - slight lift or color change */
+   /* box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light); */
+   opacity: 0.9;
+}
+
+.neumorphic-button:active {
+  box-shadow: var(--neumorphic-shadow-pressed);
+  transform: scale(0.98); /* Press down effect */
+  color: var(--rose-warm); /* Indicate active state */
+}
+
+.neumorphic-button--primary {
+  background-color: var(--rose-warm);
+  color: var(--white);
+  /* Primary buttons might have slightly different shadow base if needed */
+}
+.neumorphic-button--primary:active {
+    background-color: #c86a5d; /* Darker primary on press */
+    color: var(--white);
+    box-shadow: var(--neumorphic-shadow-pressed);
+}
+
+.neumorphic-button--secondary {
+    background-color: var(--peach-sun);
+    color: var(--white);
+}
+.neumorphic-button--secondary:active {
+     background-color: #e78a3e;
+     color: var(--white);
+     box-shadow: var(--neumorphic-shadow-pressed);
+}
+
+
+.neumorphic-button--icon {
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 50%; /* Circular icon buttons */
+}
+
+/* Floating Action Button (Scan) */
+.fab-scan {
+    position: fixed;
+    bottom: 80px; /* Adjust based on nav bar height */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 64px;
+    background-color: var(--rose-warm);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 10px 20px rgba(217, 122, 109, 0.4), var(--neumorphic-shadow-raised); /* Stronger shadow + color hint */
+    z-index: 100;
+    animation: breathe 2.5s infinite ease-in-out;
+}
+
+.fab-scan .icon {
+    fill: var(--white);
+    width: 28px;
+    height: 28px;
+}
+
+@keyframes breathe {
+    0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0px 10px 20px rgba(217, 122, 109, 0.4), var(--neumorphic-shadow-raised); }
+    50% { transform: translateX(-50%) scale(1.05); box-shadow: 0px 15px 25px rgba(217, 122, 109, 0.5), 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light); }
+}
+
+.fab-scan:active {
+    animation: none; /* Stop breathing on click */
+    transform: translateX(-50%) scale(0.95);
+    box-shadow: var(--neumorphic-shadow-pressed);
+}
+
+
+/* Inputs */
+.neumorphic-input {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  background-color: var(--base-bg); /* Slightly different shade maybe? */
+  color: var(--gray-deep);
+  font-size: 16px;
+  border-radius: var(--border-radius-medium);
+  box-shadow: var(--neumorphic-shadow-inset);
+  transition: var(--transition-smooth);
+}
+
+.neumorphic-input::placeholder {
+  color: var(--gray-light);
+}
+
+.neumorphic-input:focus {
+  outline: none;
+  /* Optional focus style: slightly stronger inset or subtle outer glow */
+   box-shadow: var(--neumorphic-shadow-inset), 0 0 0 2px rgba(217, 122, 109, 0.3);
+}
+
+
+/* Cards */
+.neumorphic-card {
+  background-color: var(--white-sand); /* Use sand color for cards */
+  border-radius: var(--border-radius-large);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--neumorphic-shadow-raised);
+  filter: drop-shadow(0px 0px 0px rgba(0,0,0,0)); /* Base for potential hover */
+  transition: var(--transition-smooth);
+  overflow: hidden; /* Ensure content fits */
+}
+.neumorphic-card:hover {
+   /* Example hover: slightly lift */
+   transform: translateY(-3px);
+    box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px; /* Standard height */
+  background-color: var(--rose-warm);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 10px; /* Adjust for safe area if needed */
+  /* Neumorphic effect on the bar itself or just buttons? Let's keep bar flat for contrast */
+   /* box-shadow: 0px -5px 15px rgba(0,0,0,0.08); */ /* Optional top shadow */
+   z-index: 99;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--white); /* Icon/Text color on nav */
+  text-decoration: none;
+  font-size: 10px;
+  flex: 1;
+  text-align: center;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.nav-item.active, .nav-item:active {
+    opacity: 1.0;
+}
+
+
+.nav-item .icon {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
+  fill: currentColor; /* Use text color for fill */
+}
+
+/* Icons */
+.icon {
+  display: inline-block;
+  width: 1em; /* Default size, can be overridden */
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor; /* Or specific color */
+  fill: currentColor; /* Or specific color */
+}
+
+/* Typography */
+.slogan {
+  font-family: var(--font-slogan);
+  font-size: 36px; /* Adjust size */
+  color: var(--rose-warm);
+  text-align: center;
+  margin: 20px 0;
+  /* Add potential text-shadow for subtle depth if needed */
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--gray-deep);
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.section-title {
+     font-size: 18px;
+     font-weight: 600;
+     color: var(--gray-deep);
+     margin-bottom: 15px;
+     padding: 0 20px;
+}
+
+/* Utilities */
+.padding-container {
+    padding: 20px;
+}
+.margin-bottom-l { margin-bottom: 30px; }
+.margin-bottom-m { margin-bottom: 20px; }
+.margin-bottom-s { margin-bottom: 10px; }
+.text-center { text-align: center; }
+.text-muted { color: var(--gray-medium); font-size: 14px; }
+
+/* Specific Page Styles Placeholder */
+
+/* Home */
+.home-map-placeholder {
+    height: 250px;
+    background-color: #ddd; /* Placeholder color */
+    background-image: url('https://source.unsplash.com/random/375x250/?milan,map'); /* Placeholder map image */
+    background-size: cover;
+    background-position: center;
+    border-radius: var(--border-radius-medium);
+    margin: 0 20px 20px 20px;
+     box-shadow: var(--neumorphic-shadow-inset); /* Inset map */
+}
+.recommendation-list .neumorphic-card { background-color: var(--base-bg); } /* Cards on base bg */
+.recommendation-item { display: flex; justify-content: space-between; align-items: center;}
+.status-indicator { width: 12px; height: 12px; border-radius: 50%; }
+.status-available { background-color: #77dd77; /* Green */ }
+.status-limited { background-color: #fdfd96; /* Yellow */ }
+.status-empty { background-color: #ff6961; /* Red */}
+
+
+/* My Page - Chart */
+.period-chart-container {
+    padding: 20px;
+    margin: 20px;
+    background: var(--base-bg);
+    border-radius: var(--border-radius-large);
+    box-shadow: var(--neumorphic-shadow-inset); /* Chart area is inset */
+}
+.period-chart svg {
+    width: 100%;
+    height: 150px; /* Example height */
+}
+.period-chart .chart-line {
+    fill: none;
+    stroke: url(#line-gradient); /* Use gradient */
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 1000; /* Initial length for animation */
+    stroke-dashoffset: 1000; /* Start fully dashed (hidden) */
+    animation: draw-line 2s ease-out forwards;
+}
+@keyframes draw-line {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+.period-chart .chart-point {
+    fill: var(--rose-warm);
+    r: 4; /* Radius of points */
+}
+
+/* Language Switcher */
+.language-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+.language-switcher .lang-button {
+    padding: 10px 15px;
+    border-radius: var(--border-radius-medium);
+    font-size: 14px;
+    background-color: var(--base-bg);
+    color: var(--gray-medium);
+    box-shadow: var(--neumorphic-shadow-raised);
+    cursor: pointer;
+    border: none;
+}
+.language-switcher .lang-button.active {
+     box-shadow: var(--neumorphic-shadow-inset);
+     color: var(--rose-warm);
+     font-weight: 600;
+}
+
+/* Style Guide Link (Optional) */
+#style-guide-link {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 12px;
+    color: var(--peach-sun);
+    text-decoration: none;
+    z-index: 101;
+}
