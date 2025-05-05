@@ -1,0 +1,152 @@
+<!-- 06_community_post.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaCare - Dettaglio Post</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For potential extra icons -->
+    <style>
+        /* Re-use styles from 05_community.html */
+        .post-card { margin-bottom: 25px; background-color: var(--white-sand); }
+        .post-header { display: flex; align-items: center; margin-bottom: 10px; }
+        .post-avatar { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; background-color: #ccc; object-fit: cover; box-shadow: var(--neumorphic-shadow-inset);}
+        .post-userinfo .name { font-weight: 600; font-size: 15px;}
+        .post-userinfo .timestamp { font-size: 12px; color: var(--gray-medium); }
+        .post-content { font-size: 16px; line-height: 1.7; margin-bottom: 20px; color: var(--gray-deep); padding: 10px 0;} /* More padding/line-height */
+        .post-footer { display: flex; justify-content: flex-start; gap: 20px; align-items: center; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 15px; margin-top: 15px;}
+        .post-actions button { background: none; border: none; padding: 5px; cursor: pointer; color: var(--gray-medium); display: inline-flex; align-items: center; gap: 5px;}
+        .post-actions button .icon { width: 20px; height: 20px; fill: currentColor;}
+        .post-actions button:active { color: var(--rose-warm); }
+        .post-actions .count { font-size: 14px; }
+
+        .comments-section { padding: 0 20px 150px 20px; } /* Extra padding bottom */
+        .comment-card { margin-bottom: 15px; padding: 15px; background-color: var(--base-bg); /* Slightly different bg */}
+        .comment-input-area {
+            position: fixed; /* Stick to bottom */
+            bottom: 70px; /* Above nav bar */
+            left: 0;
+            right: 0;
+            background-color: var(--white-sand);
+            padding: 15px 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.08);
+            z-index: 98; /* Below nav */
+        }
+        .comment-input-area .neumorphic-input { flex-grow: 1; }
+        .comment-input-area .neumorphic-button--icon { width: 44px; height: 44px; flex-shrink: 0;}
+
+         .back-button {
+             position: absolute; top: 20px; left: 15px; z-index: 10;
+             background: none; border: none; padding: 5px;
+         }
+         .back-button .icon { width: 28px; height: 28px; fill: var(--gray-deep);}
+    </style>
+</head>
+<body class="app-frame">
+    <!-- SVG Icons -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Paste all symbols from icons.svg here -->
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></symbol>
+        <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+        <symbol id="icon-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+        <symbol id="icon-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="7" y1="12" x2="17" y2="12"></line></symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></symbol>
+        <symbol id="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></symbol>
+        <symbol id="icon-message-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></symbol>
+         <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></symbol>
+        <!-- Add other needed icons -->
+    </svg>
+
+    <header style="position: relative; height: 60px;">
+        <a href="05_community.html" class="back-button" aria-label="Go back">
+             <svg class="icon"><use xlink:href="#icon-chevron-left"></use></svg>
+        </a>
+        <h1 class="page-title" style="padding-top: 20px;" data-i18n="post_detail_title">Dettaglio Post</h1>
+    </header>
+
+    <main>
+        <!-- Original Post -->
+        <div class="neumorphic-card post-card" style="margin: 0 20px 25px 20px;">
+             <div class="post-header">
+                 <img src="https://source.unsplash.com/random/80x80/?woman,portrait" alt="User Avatar" class="post-avatar">
+                 <div class="post-userinfo">
+                     <div class="name" data-i18n="user_name_1">Giulia R.</div>
+                     <div class="timestamp" data-i18n="post_time_1">2 ore fa</div>
+                 </div>
+             </div>
+             <div class="post-content" data-i18n="post_content_1_full">
+                 Qualcuna ha consigli su come gestire i crampi durante le lezioni universitarie? A volte sono così forti che non riesco a concentrarmi. Ho provato antidolorifici ma cerco soluzioni più naturali o pratiche. Grazie mille in anticipo! 😔 #periodproblems #consigli #università
+             </div>
+             <div class="post-footer">
+                 <div class="post-actions">
+                     <button aria-label="Like post">
+                         <svg class="icon"><use xlink:href="#icon-heart"></use></svg>
+                         <span class="count" data-i18n="likes_1">15</span>
+                     </button>
+                     <button aria-label="Comment count - view comments below">
+                         <svg class="icon"><use xlink:href="#icon-message-circle"></use></svg>
+                         <span class="count" data-i18n="comments_1">4</span>
+                     </button>
+                 </div>
+             </div>
+         </div>
+
+         <!-- Comments Section -->
+         <section class="comments-section">
+            <h2 class="section-title" data-i18n="comments_title">Commenti</h2>
+
+            <!-- Comment 1 -->
+            <div class="neumorphic-card comment-card">
+                <div class="post-header">
+                    <img src="https://source.unsplash.com/random/60x60/?woman,face" alt="User Avatar" class="post-avatar" style="width:30px; height: 30px;">
+                    <div class="post-userinfo">
+                         <div class="name" data-i18n="commenter_name_1">Anna V.</div>
+                         <div class="timestamp" data-i18n="comment_time_1">1 ora fa</div>
+                    </div>
+                </div>
+                <div class="post-content" style="font-size: 14px;" data-i18n="comment_content_1">
+                    Ti capisco benissimo! Una borsa dell'acqua calda piccola da tenere sulla pancia aiuta tanto. E bere tisane allo zenzero!
+                </div>
+            </div>
+
+             <!-- Comment 2 -->
+            <div class="neumorphic-card comment-card">
+                <div class="post-header">
+                     <img src="https://source.unsplash.com/random/60x60/?person,smile" alt="User Avatar" class="post-avatar" style="width:30px; height: 30px;">
+                    <div class="post-userinfo">
+                         <div class="name" data-i18n="commenter_name_2">Martina F.</div>
+                         <div class="timestamp" data-i18n="comment_time_2">30 minuti fa</div>
+                    </div>
+                </div>
+                <div class="post-content" style="font-size: 14px;" data-i18n="comment_content_2">
+                   Prova con un po' di stretching leggero o yoga specifico per il ciclo. A me a volte allevia la tensione. Forza! 💪
+                </div>
+            </div>
+             <!-- More comments -->
+         </section>
+
+    </main>
+
+    <!-- Comment Input Area -->
+    <div class="comment-input-area">
+         <input type="text" class="neumorphic-input" placeholder="Scrivi un commento..." data-i18n="comment_placeholder">
+         <button class="neumorphic-button neumorphic-button--primary neumorphic-button--icon" aria-label="Send comment">
+             <svg class="icon" style="fill: var(--white);"><use xlink:href="#icon-send"></use></svg>
+         </button>
+    </div>
+
+    <nav class="bottom-nav">
+         <a href="01_home.html" class="nav-item" data-i18n="nav_home"> <svg class="icon"><use xlink:href="#icon-home"></use></svg> Home </a>
+        <a href="02_find_points.html" class="nav-item" data-i18n="nav_find"> <svg class="icon"><use xlink:href="#icon-map-pin"></use></svg> Trova </a>
+        <a href="03_emotion_start.html" class="nav-item" data-i18n="nav_emotion"> <svg class="icon"><use xlink:href="#icon-smile"></use></svg> Emozioni </a>
+        <a href="05_community.html" class="nav-item active" data-i18n="nav_community"> <svg class="icon"><use xlink:href="#icon-users"></use></svg> Comunità </a>
+        <a href="09_my_page.html" class="nav-item" data-i18n="nav_my"> <svg class="icon"><use xlink:href="#icon-user"></use></svg> Io </a>
+    </nav>
+</body>
+</html>
