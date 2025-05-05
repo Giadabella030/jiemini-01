@@ -1,0 +1,174 @@
+<!-- 12_my_settings.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LunaCare - Impostazioni</title>
+    <link rel="stylesheet" href="style.css">
+     <style>
+        /* Re-use menu-list styles from my_page */
+         .menu-list .menu-item {
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             padding: 18px 15px;
+             margin-bottom: 15px;
+             text-decoration: none;
+             color: var(--gray-deep);
+             background-color: var(--base-bg);
+             border-radius: var(--border-radius-medium);
+             box-shadow: var(--neumorphic-shadow-raised);
+             transition: var(--transition-smooth);
+         }
+          .menu-list .menu-item:active {
+              box-shadow: var(--neumorphic-shadow-pressed);
+              transform: scale(0.98);
+          }
+         .menu-item .icon { width: 22px; height: 22px; margin-right: 15px; fill: var(--rose-warm); }
+         .menu-item .arrow-icon { width: 18px; height: 18px; fill: var(--gray-light); }
+         .menu-item span { flex-grow: 1; font-size: 16px; }
+
+         /* Language Switcher Specific styles from style.css are already defined */
+        .language-section { padding: 20px; margin-bottom: 20px; }
+        .language-title { font-weight: 600; margin-bottom: 15px; color: var(--gray-deep); }
+
+         /* Logout button */
+         .logout-button {
+             margin: 40px 20px;
+             background-color: #ffeded; /* Light red background */
+             color: #cc5f5f; /* Reddish text */
+             font-weight: 600;
+              box-shadow: 6px 6px 12px rgba(204, 95, 95, 0.2), -6px -6px 12px rgba(255, 255, 255, 0.8);
+         }
+         .logout-button:active {
+              box-shadow: var(--neumorphic-shadow-pressed);
+              background-color: #ffdada;
+         }
+         .back-button { /* Simple back button for header */
+             position: absolute;
+             top: 20px;
+             left: 15px;
+             z-index: 10;
+             background: none;
+             border: none;
+             padding: 5px;
+         }
+         .back-button .icon { width: 28px; height: 28px; fill: var(--gray-deep);}
+    </style>
+</head>
+<body class="app-frame" style="padding-bottom: 100px;">
+     <!-- SVG Icons -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <!-- Paste all symbols from icons.svg here -->
+        <symbol id="icon-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></symbol>
+        <symbol id="icon-map-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></symbol>
+        <symbol id="icon-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></symbol>
+        <symbol id="icon-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></symbol>
+        <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></symbol>
+        <symbol id="icon-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><line x1="7" y1="12" x2="17" y2="12"></line></symbol>
+        <symbol id="icon-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></symbol>
+        <symbol id="icon-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></symbol>
+        <symbol id="icon-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></symbol>
+        <symbol id="icon-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></symbol>
+        <symbol id="icon-log-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></symbol>
+         <!-- Add other needed icons -->
+    </svg>
+
+     <header style="position: relative; height: 60px;">
+        <a href="09_my_page.html" class="back-button" aria-label="Go back">
+             <svg class="icon"><use xlink:href="#icon-chevron-left"></use></svg>
+        </a>
+        <h1 class="page-title" style="padding-top: 20px;" data-i18n="my_page_settings">Impostazioni</h1>
+    </header>
+
+    <main>
+         <!-- Language Section -->
+        <section class="language-section">
+            <div class="language-title" data-i18n="settings_language">Lingua</div>
+            <div class="language-switcher">
+                <button class="lang-button active" data-lang="it" data-i18n="lang_it">Italiano</button>
+                <button class="lang-button" data-lang="en" data-i18n="lang_en">English</button>
+                <button class="lang-button" data-lang="zh" data-i18n="lang_zh">中文</button>
+            </div>
+        </section>
+
+        <!-- Other Settings -->
+         <section class="menu-list" style="padding: 0 20px;">
+            <a href="#" class="menu-item">
+                <svg class="icon" style="fill: var(--peach-sun);"><use xlink:href="#icon-bell"></use></svg>
+                <span data-i18n="settings_notifications">Notifiche</span>
+                <!-- Placeholder for Toggle Switch -->
+                <div class="neumorphic-inset" style="width: 50px; height: 26px; border-radius: 13px; position: relative; background-color: #ccc;">
+                    <div class="neumorphic-raised" style="width: 22px; height: 22px; border-radius: 50%; position: absolute; top: 2px; left: 2px; background-color: white; transition: left 0.3s ease;"></div>
+                </div>
+            </a>
+             <a href="#" class="menu-item">
+                 <svg class="icon" style="fill: var(--gold-gentle);"><use xlink:href="#icon-info"></use></svg>
+                <span data-i18n="settings_about">Informazioni sull'app</span>
+                 <svg class="icon arrow-icon"><use xlink:href="#icon-chevron-right"></use></svg>
+            </a>
+            <!-- Add more settings items: Account, Privacy Policy etc. -->
+         </section>
+
+        <!-- Logout Button -->
+        <button class="neumorphic-button logout-button" style="width: calc(100% - 40px);">
+            <svg class="icon" style="margin-right: 10px; fill: currentColor;"><use xlink:href="#icon-log-out"></use></svg>
+            <span data-i18n="settings_logout">Esci</span>
+        </button>
+
+    </main>
+
+    <!-- No FAB Scan on settings page typically -->
+    <!-- <button class="fab-scan neumorphic-button--icon" aria-label="Scan QR Code">
+        <svg class="icon"><use xlink:href="#icon-scan"></use></svg>
+    </button> -->
+
+    <nav class="bottom-nav">
+        <a href="01_home.html" class="nav-item" data-i18n="nav_home"> <svg class="icon"><use xlink:href="#icon-home"></use></svg> Home </a>
+        <a href="02_find_points.html" class="nav-item" data-i18n="nav_find"> <svg class="icon"><use xlink:href="#icon-map-pin"></use></svg> Trova </a>
+        <a href="03_emotion_start.html" class="nav-item" data-i18n="nav_emotion"> <svg class="icon"><use xlink:href="#icon-smile"></use></svg> Emozioni </a>
+        <a href="05_community.html" class="nav-item" data-i18n="nav_community"> <svg class="icon"><use xlink:href="#icon-users"></use></svg> Comunità </a>
+        <a href="09_my_page.html" class="nav-item active" data-i18n="nav_my"> <svg class="icon"><use xlink:href="#icon-user"></use></svg> Io </a>
+    </nav>
+
+    <script>
+        // Basic Language Switcher Interaction
+        const langButtons = document.querySelectorAll('.language-switcher .lang-button');
+        langButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                langButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const selectedLang = button.getAttribute('data-lang');
+                console.log('Language selected:', selectedLang);
+                // Here you would call the function to load and apply the language JSON
+                // switchLanguage(selectedLang); // Assuming switchLanguage function exists
+                 // Example of changing one element directly for demo
+                 document.querySelector('.page-title').textContent = {
+                     'it': 'Impostazioni',
+                     'en': 'Settings',
+                     'zh': '设置'
+                 }[selectedLang] || 'Settings';
+            });
+        });
+
+         // Basic Toggle Switch Interaction
+        const toggleSwitch = document.querySelector('.menu-item .neumorphic-inset');
+        if (toggleSwitch) {
+            toggleSwitch.addEventListener('click', () => {
+                const knob = toggleSwitch.querySelector('.neumorphic-raised');
+                const currentLeft = knob.style.left;
+                if (currentLeft === '2px' || currentLeft === '') {
+                    knob.style.left = '26px'; // Move right
+                    toggleSwitch.style.backgroundColor = 'var(--rose-warm)'; // Active color
+                } else {
+                    knob.style.left = '2px'; // Move left
+                    toggleSwitch.style.backgroundColor = '#ccc'; // Inactive color
+                }
+                console.log('Toggle switched');
+            });
+        }
+    </script>
+
+</body>
+</html>
